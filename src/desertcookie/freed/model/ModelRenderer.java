@@ -22,31 +22,40 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package desertcookie.freed.core;
+package desertcookie.freed.model;
 
 
-import desertcookie.freed.model.Model;
-import desertcookie.freed.model.ModelRenderer;
-import desertcookie.freed.shaders.StaticShader;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 
 
-public class MasterRenderer {
+public class ModelRenderer {
 	
 	
-	private StaticShader staticShader;
-	private ModelRenderer modelRenderer;
+	public ModelRenderer( ) {}
 	
 	
-	public MasterRenderer( ) {
-		staticShader = new StaticShader( );
-		modelRenderer = new ModelRenderer( );
+	public void render( Model model ) {
+		bindModel( model );
+		renderModel( model );
+		unbindModel( model );
 	}
 	
 	
-	public void renderModel( Model model ) {
-		staticShader.startShader( );
-		modelRenderer.render( model );
-		staticShader.stopShader( );
+	private void bindModel( Model model ) {
+		model.bind( );
+		GL20.glEnableVertexAttribArray( 0 ); // vertex positions
+		GL20.glEnableVertexAttribArray( 1 ); // per vertex color data
+	}
+	
+	private void renderModel( Model model ) {
+		GL11.glDrawElements( GL11.GL_TRIANGLES,model.getVertexCount( ),GL11.GL_UNSIGNED_INT,0 );
+	}
+	
+	private void unbindModel( Model model ) {
+		GL20.glDisableVertexAttribArray( 0 );
+		GL20.glDisableVertexAttribArray( 1 );
+		model.unbind( );
 	}
 	
 	

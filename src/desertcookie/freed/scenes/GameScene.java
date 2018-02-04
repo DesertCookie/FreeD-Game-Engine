@@ -41,7 +41,7 @@ public abstract class GameScene {
 	}
 	
 	
-	public abstract void initialize(ResourceLoader loader);
+	public abstract void initialize( ResourceLoader loader );
 	
 	public abstract void update( double deltaTime,InputHandler input );
 	

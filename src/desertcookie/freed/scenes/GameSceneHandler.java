@@ -39,41 +39,41 @@ public class GameSceneHandler {
 	private GameScene activeScene;
 	
 	
-	public GameSceneHandler() {
-		registeredScenes = new HashMap<>(  );
+	public GameSceneHandler( ) {
+		registeredScenes = new HashMap<>( );
 		
-		GameScene splashScreen = new SplashScreen();
-		registeredScenes.put( splashScreen.getSceneId(),splashScreen );
-		splashScreen.enter();
+		GameScene splashScreen = new SplashScreen( );
+		registeredScenes.put( splashScreen.getSceneId( ),splashScreen );
+		splashScreen.enter( );
 		activeScene = splashScreen;
 	}
 	
 	
-	public void registerScene(GameScene scene) {
-		Enum<?> sceneId = scene.getSceneId();
-		if(registeredScenes.containsKey( sceneId ))
+	public void registerScene( GameScene scene ) {
+		Enum<?> sceneId = scene.getSceneId( );
+		if( registeredScenes.containsKey( sceneId ) )
 			throw new IllegalArgumentException( "There is already a scene registered with the ID " + sceneId );
-			
+		
 		registeredScenes.put( sceneId,scene );
 	}
 	
-	public void removeScene(Enum<?> sceneId) {
-		if(!registeredScenes.containsKey( sceneId ))
-			throw new IllegalArgumentException( "There is no scene registered with the ID "+sceneId );
+	public void removeScene( Enum<?> sceneId ) {
+		if( !registeredScenes.containsKey( sceneId ) )
+			throw new IllegalArgumentException( "There is no scene registered with the ID " + sceneId );
 		
 		registeredScenes.remove( sceneId );
 	}
 	
-	public void setScene(Enum<?> sceneId) {
-		if(!registeredScenes.containsKey( sceneId ))
-			throw new IllegalArgumentException( "There is no scene registered with the ID "+sceneId );
+	public void setScene( Enum<?> sceneId ) {
+		if( !registeredScenes.containsKey( sceneId ) )
+			throw new IllegalArgumentException( "There is no scene registered with the ID " + sceneId );
 		
 		GameScene oldScene = activeScene;
 		GameScene newScene = registeredScenes.get( sceneId );
 		activeScene = null;
 		
-		oldScene.leave();
-		newScene.enter();
+		oldScene.leave( );
+		newScene.enter( );
 		activeScene = newScene;
 	}
 	
@@ -87,23 +87,23 @@ public class GameSceneHandler {
 		}
 	}
 	
-	public void updateActiveScene( double deltaTime,InputHandler inputHandler) {
-		if(activeScene!=null)
+	public void updateActiveScene( double deltaTime,InputHandler inputHandler ) {
+		if( activeScene != null )
 			activeScene.update( deltaTime,inputHandler );
 	}
 	
-	public void renderActiveScene( MasterRenderer masterRenderer) {
-		if(activeScene != null)
+	public void renderActiveScene( MasterRenderer masterRenderer ) {
+		if( activeScene != null )
 			activeScene.render( masterRenderer );
 	}
 	
-	public void exit() {
-		activeScene.leave();
+	public void exit( ) {
+		activeScene.leave( );
 		activeScene = null;
 		for( GameScene scene : registeredScenes.values( ) ) {
-			scene.exit();
+			scene.exit( );
 		}
-		registeredScenes.clear();
+		registeredScenes.clear( );
 	}
 	
 	

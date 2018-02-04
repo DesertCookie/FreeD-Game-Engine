@@ -26,19 +26,15 @@
 import desertcookie.freed.core.MasterRenderer;
 import desertcookie.freed.core.ResourceLoader;
 import desertcookie.freed.input.InputHandler;
-import desertcookie.freed.models.Model;
+import desertcookie.freed.model.Model;
+import desertcookie.freed.model.ModelCreator;
 import desertcookie.freed.scenes.DefaultSceneIDs;
 import desertcookie.freed.scenes.GameScene;
-import desertcookie.freed.shaders.ShaderProgram;
-import desertcookie.freed.shaders.StaticShader;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 
 
 public class TestScene extends GameScene {
 	
 	
-	private StaticShader shader;
 	private Model model;
 	
 	
@@ -49,26 +45,25 @@ public class TestScene extends GameScene {
 	
 	@Override
 	public void initialize( ResourceLoader loader ) {
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		shader = new StaticShader();
-		float[] positions = new float[]{
-				-0.5f, 0.5f, 0f,
-				-0.5f, -0.5f, 0f,
-				0.5f, -0.5f, 0f,
-				0.5f, 0.5f, 0f
+		ModelCreator modelCreator = new ModelCreator( );
+		
+		float[] vertices = new float[] {
+				-0.5f,0.5f,0f,
+				-0.5f,-0.5f,0f,
+				0.5f,-0.5f,0f,
+				0.5f,0.5f,0f
 		};
 		int[] indices = new int[] {
-				0, 1, 3,
-				3, 1, 2
+				0,1,3,
+				3,1,2
 		};
 		float[] colors = new float[] {
-			1, 0, 0, 1,
-			1, 0, 0, 0.1f,
-			0, 1, 0, 0.1f,
-			0, 1, 0, 1
+				1,0,0,1,
+				1,0,0,0.1f,
+				0,1,0,0.1f,
+				0,1,0,1
 		};
-		model = loader.createModel( positions,indices,colors );
+		model = modelCreator.createModel( vertices,indices,colors );
 	}
 	
 	@Override
@@ -78,9 +73,7 @@ public class TestScene extends GameScene {
 	
 	@Override
 	public void render( MasterRenderer renderer ) {
-		shader.start();
 		renderer.renderModel( model );
-		shader.stop();
 	}
 	
 	

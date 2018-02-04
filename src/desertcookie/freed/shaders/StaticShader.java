@@ -22,31 +22,25 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package desertcookie.freed.core;
+package desertcookie.freed.shaders;
 
 
-import desertcookie.freed.model.Model;
-import desertcookie.freed.model.ModelRenderer;
-import desertcookie.freed.shaders.StaticShader;
-
-
-public class MasterRenderer {
+public class StaticShader extends Shader {
 	
 	
-	private StaticShader staticShader;
-	private ModelRenderer modelRenderer;
+	private static final String VERTEX_SHADER_FILE = "/shaders/static/vertexShader.glsl";
+	private static final String FRAGMENT_SHADER_FILE = "/shaders/static/fragmentShader.glsl";
 	
 	
-	public MasterRenderer( ) {
-		staticShader = new StaticShader( );
-		modelRenderer = new ModelRenderer( );
+	public StaticShader( ) {
+		super( VERTEX_SHADER_FILE,FRAGMENT_SHADER_FILE );
 	}
 	
 	
-	public void renderModel( Model model ) {
-		staticShader.startShader( );
-		modelRenderer.render( model );
-		staticShader.stopShader( );
+	@Override
+	protected void bindAttributes( ) {
+		super.bindAttributeLocation( 0,"position" ); // vertex position
+		super.bindAttributeLocation( 1,"color" ); // per vertex color data
 	}
 	
 	

@@ -66,21 +66,21 @@ public abstract class Game {
 	public void start( ) {
 		display.createDisplay( 0 );
 		inputHandler.registerInputHandler( display.getWindowId( ) );
-		resourceLoader = new ResourceLoader();
-		gameSceneHandler.initializeRegisteredScenes(resourceLoader);
-		Thread updateThread = new Thread( updateLoop() );
+		resourceLoader = new ResourceLoader( );
+		gameSceneHandler.initializeRegisteredScenes( resourceLoader );
+		Thread updateThread = new Thread( updateLoop( ) );
 		updateThread.setDaemon( true );
 		
 		run = true;
-		updateThread.start();
+		updateThread.start( );
 		display.setVisible( true );
-		renderLoop();
+		renderLoop( );
 	}
 	
 	public void exit( ) {
 		gameSceneHandler.exit( );
-		resourceLoader.exit();
-		display.exit();
+		resourceLoader.exit( );
+		display.exit( );
 	}
 	
 	
@@ -114,9 +114,9 @@ public abstract class Game {
 			gameSceneHandler.renderActiveScene( masterRenderer );
 			display.updateDisplay( );
 			
-			run = !display.isClosed();
+			run = !display.isClosed( );
 		}
-		exit();
+		exit( );
 	}
 	
 	private void sleep( long time ) {

@@ -33,17 +33,17 @@ public class TestGame extends Game {
 	
 	
 	public static void main( String[] args ) {
-		Game testGame = new TestGame();
+		Game testGame = new TestGame( );
 		
-		Display display = TestGame.getDisplay();
+		Display display = TestGame.getDisplay( );
 		display.setTitle( "Test Game" );
 		display.setSize( 1280,720 );
 		
-		GameSceneHandler sceneHandler = TestGame.getGameSceneHandler();
-		sceneHandler.registerScene( new TestScene(  ) );
+		GameSceneHandler sceneHandler = TestGame.getGameSceneHandler( );
+		sceneHandler.registerScene( new TestScene( ) );
 		sceneHandler.setScene( DefaultSceneIDs.Main_Menu );
 		
-		testGame.start();
+		testGame.start( );
 	}
 	
 	

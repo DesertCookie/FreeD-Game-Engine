@@ -201,7 +201,8 @@ public class Display {
 		GL.createCapabilities( );
 		
 		GL11.glClearColor( 1f,1f,1f,1f );
-		
+		GL11.glEnable( GL11.GL_BLEND );
+		GL11.glBlendFunc( GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA );
 	}
 	
 	public void updateDisplay( ) {

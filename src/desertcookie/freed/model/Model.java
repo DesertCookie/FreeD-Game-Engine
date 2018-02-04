@@ -22,31 +22,39 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package desertcookie.freed.core;
+package desertcookie.freed.model;
 
 
-import desertcookie.freed.model.Model;
-import desertcookie.freed.model.ModelRenderer;
-import desertcookie.freed.shaders.StaticShader;
+import org.lwjgl.opengl.GL30;
 
 
-public class MasterRenderer {
+public class Model {
 	
 	
-	private StaticShader staticShader;
-	private ModelRenderer modelRenderer;
+	private int vaoId;
+	private int vertexCount;
 	
 	
-	public MasterRenderer( ) {
-		staticShader = new StaticShader( );
-		modelRenderer = new ModelRenderer( );
+	Model( int vaoId,int vertexCount ) {
+		this.vaoId = vaoId;
+		this.vertexCount = vertexCount;
 	}
 	
 	
-	public void renderModel( Model model ) {
-		staticShader.startShader( );
-		modelRenderer.render( model );
-		staticShader.stopShader( );
+	public int getVaoId( ) {
+		return vaoId;
+	}
+	
+	public int getVertexCount( ) {
+		return vertexCount;
+	}
+	
+	public void bind( ) {
+		GL30.glBindVertexArray( vaoId );
+	}
+	
+	public void unbind( ) {
+		GL30.glBindVertexArray( vaoId );
 	}
 	
 	

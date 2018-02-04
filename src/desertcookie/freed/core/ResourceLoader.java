@@ -28,7 +28,7 @@ package desertcookie.freed.core;
 public class ResourceLoader {
 	
 	
-	public ResourceLoader() {
+	public ResourceLoader( ) {
 	
 	}
 	
@@ -36,7 +36,7 @@ public class ResourceLoader {
 	///////////////////////// INTERNAL METHODS /////////////////////////
 	
 	
-	public void exit() {
+	public void exit( ) {
 	
 	}
 	
