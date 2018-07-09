@@ -22,34 +22,30 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package desertcookie.freed.core;
+package desertcookie.freed.model;
 
 
 import desertcookie.freed.textures.Texture;
-import desertcookie.freed.textures.TextureLoader;
 
 
-public class ResourceLoader {
+public class TexturedModel extends Model {
 	
 	
-	private TextureLoader textureLoader;
+	private Texture texture;
 	
 	
-	public ResourceLoader() {
-		textureLoader = new TextureLoader();
+	TexturedModel( int vaoId,int vertexCount,Texture texture ) {
+		super( vaoId,vertexCount );
+		this.texture = texture;
 	}
 	
 	
-	public Texture loadTexture( String filepath ) {
-		return textureLoader.loadTexture( filepath );
+	public Texture getTexture() {
+		return texture;
 	}
 	
-	
-	///////////////////////// INTERNAL METHODS /////////////////////////
-	
-	
-	public void exit() {
-		textureLoader.exit();
+	public void setTexture( Texture texture ) {
+		this.texture = texture;
 	}
 	
 	

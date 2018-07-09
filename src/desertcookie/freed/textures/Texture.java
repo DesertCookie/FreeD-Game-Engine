@@ -22,34 +22,44 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package desertcookie.freed.core;
+package desertcookie.freed.textures;
 
 
-import desertcookie.freed.textures.Texture;
-import desertcookie.freed.textures.TextureLoader;
+import org.lwjgl.opengl.GL11;
 
 
-public class ResourceLoader {
+public class Texture {
 	
 	
-	private TextureLoader textureLoader;
+	private int textureId;
+	private int width, height;
 	
 	
-	public ResourceLoader() {
-		textureLoader = new TextureLoader();
+	Texture( int textureId,int width,int height ) {
+		this.textureId = textureId;
+		this.width = width;
+		this.height = height;
 	}
 	
 	
-	public Texture loadTexture( String filepath ) {
-		return textureLoader.loadTexture( filepath );
+	public int getTextureId() {
+		return textureId;
 	}
 	
+	public int getWidth() {
+		return width;
+	}
 	
-	///////////////////////// INTERNAL METHODS /////////////////////////
+	public int getHeight() {
+		return height;
+	}
 	
+	public void bind() {
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D,textureId);
+	}
 	
-	public void exit() {
-		textureLoader.exit();
+	public void unbind() {
+		GL11.glBindTexture( GL11.GL_TEXTURE_2D,0 );
 	}
 	
 	

@@ -22,34 +22,78 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package desertcookie.freed.core;
+package desertcookie.freed.model;
 
 
-import desertcookie.freed.textures.Texture;
-import desertcookie.freed.textures.TextureLoader;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 
-public class ResourceLoader {
+public class Entity {
 	
 	
-	private TextureLoader textureLoader;
+	private TexturedModel texturedModel;
+	private Vector3f position;
+	private Vector3f rotation;
+	private Vector3f scale;
 	
 	
-	public ResourceLoader() {
-		textureLoader = new TextureLoader();
+	public Entity( TexturedModel texturedModel,Vector3f position,Vector3f rotation,Vector3f scale ) {
+		this.texturedModel = texturedModel;
+		this.position = position;
+		this.rotation = rotation;
+		this.scale = scale;
 	}
 	
 	
-	public Texture loadTexture( String filepath ) {
-		return textureLoader.loadTexture( filepath );
+	public TexturedModel getTexturedModel() {
+		return texturedModel;
 	}
 	
+	public Vector3f getPosition() {
+		return position;
+	}
 	
-	///////////////////////// INTERNAL METHODS /////////////////////////
+	public void setPosition( Vector3f position ) {
+		this.position = position;
+	}
 	
+	public void move( float dx,float dy,float dz ) {
+		position.add( dx,dy,dz );
+	}
 	
-	public void exit() {
-		textureLoader.exit();
+	public Vector3f getRotation() {
+		return rotation;
+	}
+	
+	public void setRotation( Vector3f rotation ) {
+		this.rotation = rotation;
+	}
+	
+	public void rotate( float drx,float dry,float drz ) {
+		rotation.add( drx,dry,drz );
+	}
+	
+	public Vector3f getScale() {
+		return scale;
+	}
+	
+	public void setScale( Vector3f scale ) {
+		this.scale = scale;
+	}
+	
+	public void resize( float dsx,float dsy,float dsz ) {
+		scale.add( dsx,dsy,dsz );
+	}
+	
+	public Matrix4f createTransformationMatrix() {
+		Matrix4f matrix = new Matrix4f();
+		matrix.translate( position );
+		matrix.rotate( (float)Math.toRadians( rotation.x ),1f,0f,0f );
+		matrix.rotate( (float)Math.toRadians( rotation.y ),0f,1f,0f );
+		matrix.rotate( (float)Math.toRadians( rotation.z ),0f,0f,1f );
+		matrix.scale( scale );
+		return matrix;
 	}
 	
 	

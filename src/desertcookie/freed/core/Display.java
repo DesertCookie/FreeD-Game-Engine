@@ -1,25 +1,25 @@
-/* Copyright (c) 2017, Ruben Hahn
- * All rights reserved.
+/*
+ * Copyright 2018 Ruben Hahn
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions
+ *    and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of
+ *    conditions and the following disclaimer in the documentation and/or other materials provided
+ *    with the distribution.
+ * 3. Neither the name of the copyright holder nor the names of its contributors may be used to
+ *    endorse or promote products derived from this software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package desertcookie.freed.core;
@@ -45,7 +45,7 @@ public class Display {
 	private int vSync;
 	
 	
-	public Display( ) {
+	public Display() {
 		windowId = 0;
 		title = "";
 		x = -1;
@@ -58,11 +58,11 @@ public class Display {
 	}
 	
 	
-	public long getWindowId( ) {
+	public long getWindowId() {
 		return windowId;
 	}
 	
-	public String getTitle( ) {
+	public String getTitle() {
 		return title;
 	}
 	
@@ -72,7 +72,7 @@ public class Display {
 			GLFW.glfwSetWindowTitle( windowId,title );
 	}
 	
-	public int getX( ) {
+	public int getX() {
 		return x;
 	}
 	
@@ -82,7 +82,7 @@ public class Display {
 			GLFW.glfwSetWindowPos( windowId,x,y );
 	}
 	
-	public int getY( ) {
+	public int getY() {
 		return y;
 	}
 	
@@ -99,7 +99,7 @@ public class Display {
 			GLFW.glfwSetWindowPos( windowId,x,y );
 	}
 	
-	public int getW( ) {
+	public int getW() {
 		return w;
 	}
 	
@@ -109,7 +109,7 @@ public class Display {
 			GLFW.glfwSetWindowSize( windowId,w,h );
 	}
 	
-	public int getH( ) {
+	public int getH() {
 		return h;
 	}
 	
@@ -126,20 +126,20 @@ public class Display {
 			GLFW.glfwSetWindowSize( windowId,w,h );
 	}
 	
-	public boolean getFullscreen( ) {
+	public boolean getFullscreen() {
 		return fullscreen == GLFW.GLFW_TRUE;
 	}
 	
 	public void setFullscreen( boolean fullscreen ) {
 		if( fullscreen )
-			this.fullscreen = GLFW.glfwGetPrimaryMonitor( );
+			this.fullscreen = GLFW.glfwGetPrimaryMonitor();
 		else
 			this.fullscreen = 0;
 		if( windowId != 0 )
 			createDisplay( 0 ); // EXPERIMENTAL
 	}
 	
-	public boolean getVSync( ) {
+	public boolean getVSync() {
 		return vSync == GLFW.GLFW_TRUE;
 	}
 	
@@ -166,18 +166,18 @@ public class Display {
 			GLFW.glfwHideWindow( windowId );
 	}
 	
-	public boolean isClosed( ) {
+	public boolean isClosed() {
 		if( windowId == 0 )
 			return true;
 		return GLFW.glfwWindowShouldClose( windowId );
 	}
 	
 	public void createDisplay( long sharedWindow ) {
-		boolean initSuccessful = GLFW.glfwInit( );
+		boolean initSuccessful = GLFW.glfwInit();
 		if( !initSuccessful )
 			throw new IllegalStateException( "Failed to initialize display" );
 		
-		GLFW.glfwDefaultWindowHints( );
+		GLFW.glfwDefaultWindowHints();
 		GLFW.glfwWindowHint( GLFW.GLFW_VISIBLE,GLFW.GLFW_FALSE );
 		GLFW.glfwWindowHint( GLFW.GLFW_RESIZABLE,resizable );
 		GLFW.glfwWindowHint( GLFW.GLFW_CONTEXT_VERSION_MAJOR,3 );
@@ -186,9 +186,9 @@ public class Display {
 		GLFW.glfwWindowHint( GLFW.GLFW_OPENGL_FORWARD_COMPAT,GLFW.GLFW_TRUE );
 		
 		if( x == -1 && y == -1 ) {
-			GLFWVidMode vidMode = GLFW.glfwGetVideoMode( GLFW.glfwGetPrimaryMonitor( ) );
-			this.x = ( vidMode.width( ) - w ) / 2;
-			this.y = ( vidMode.height( ) - h ) / 2;
+			GLFWVidMode vidMode = GLFW.glfwGetVideoMode( GLFW.glfwGetPrimaryMonitor() );
+			this.x = (vidMode.width()-w)/2;
+			this.y = (vidMode.height()-h)/2;
 		}
 		
 		windowId = GLFW.glfwCreateWindow( w,h,title,fullscreen,sharedWindow );
@@ -198,23 +198,23 @@ public class Display {
 		GLFW.glfwSetWindowPos( windowId,x,y );
 		GLFW.glfwMakeContextCurrent( windowId );
 		GLFW.glfwSwapInterval( vSync );
-		GL.createCapabilities( );
+		GL.createCapabilities();
 		
 		GL11.glClearColor( 1f,1f,1f,1f );
 		GL11.glEnable( GL11.GL_BLEND );
 		GL11.glBlendFunc( GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA );
 	}
 	
-	public void updateDisplay( ) {
-		GLFW.glfwPollEvents( );
+	public void updateDisplay() {
+		GLFW.glfwPollEvents();
 		GLFW.glfwSwapBuffers( windowId );
-		GL11.glClear( GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT );
+		GL11.glClear( GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT );
 	}
 	
-	public void exit( ) {
+	public void exit() {
 		setVisible( false );
 		GLFW.glfwDestroyWindow( windowId );
-		GLFW.glfwTerminate( );
+		GLFW.glfwTerminate();
 	}
 	
 	
